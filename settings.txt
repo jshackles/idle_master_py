@@ -1,0 +1,5 @@
+sessionid = ""
+steamLogin = ""
+steamparental = ""
+sort = ""
+hasPlayTime = "false"
