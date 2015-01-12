@@ -1,7 +1,11 @@
-Idle Master
+Idle Master (Python branch)
 ===========
 
 This program will determine which of your Steam games still have Steam Trading Card drops remaining, and will go through each application to simulate you being “in-game” so that cards will drop.  It will check periodically to see if the game you’re idling has card drops remaining.  When only one drop remains, it will start checking more frequently.  When the game you’re idling has no more cards, it’ll move on to the next game.  When no more cards are available, the program will terminate.
+
+This is the Python repository which is helpful for user running the application on non-Windows operating systems or those having trouble getting the newest version of Idle Master for Windows to run correctly.  
+
+For the latest Windows version of Idle Master, [click here](https://github.com/jshackles/idle_master).
 
 Requirements
 -------
