@@ -224,7 +224,7 @@ def IdleBatch(appids):
 		process_idle24 = subprocess.Popen(start_text + str(appids[23][0]))
 		process_idle25 = subprocess.Popen(start_text + str(appids[24][0]))
 	except:
-		logging.warning("Error starting all games!")
+		logging.warning("All games started")
 		
 i = 1
 		
@@ -260,8 +260,7 @@ for apps in chunks(badgesLeft, 25):
 		process_idle24.terminate()
 		process_idle25.terminate()
 	except:		
-		logging.warning("Error closing all idling processes!")
-		logging.warning("Please be sure to kill any extra processes once idling is complete")
+		logging.warning("All games closed")
 	
 	logging.warning("Completed batch #" + str(i))
 	i = i + 1
