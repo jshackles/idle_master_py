@@ -159,8 +159,8 @@ for badge in badgeSet:
 					badgesLeft.append(push)
 			else:
 				search_playtime = re.search("([0-1]\.[0-9]) hrs on record", badge_text)
-				playtime = search_playtime.group(1)		
-				if playtime:				
+				playtime = search_playtime.group(1)
+				if playtime < 2:				
 					dropCountInt, junk = dropCount.split(" ",1)
 					dropCountInt = int(dropCountInt)
 					linkGuess = badge.find_parent().find_parent().find_parent().find_all("a")[0]["href"]
@@ -176,7 +176,7 @@ for badge in badgeSet:
 		continue
 
 logging.warning("Idle Master needs to idle " + Fore.GREEN + str(len(badgesLeft)) + Fore.RESET + " games")
-rounds = len(badgesLeft) / 25
+rounds = len(badgesLeft) / 25 + (len(badgesLeft) % 25 > 0)
 logging.warning ("The games will run in " + str(rounds) + " sets of 25 for 2 hours each")
 logging.warning ("This process will take approximately " + str(rounds*2) + " hours")
 
