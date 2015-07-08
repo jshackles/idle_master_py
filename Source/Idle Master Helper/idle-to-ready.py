@@ -139,7 +139,7 @@ for badge in badgeSet:
 	try:
 		badge_text = badge.get_text()
 		dropCount = badge.find_all("span",{"class": "progress_info_bold"})[0].contents[0]	
-		has_playtime = re.search("([0-1]\.[0-9]) hrs on record", badge_text) != None
+		has_playtime = re.search("hrs on record", badge_text) != None
 
 		if "No card drops" in dropCount :
 			continue
@@ -160,7 +160,7 @@ for badge in badgeSet:
 			else:
 				search_playtime = re.search("([0-1]\.[0-9]) hrs on record", badge_text)
 				playtime = search_playtime.group(1)
-				if playtime < 2:				
+				if int(float(playtime)) < 2:				
 					dropCountInt, junk = dropCount.split(" ",1)
 					dropCountInt = int(dropCountInt)
 					linkGuess = badge.find_parent().find_parent().find_parent().find_all("a")[0]["href"]
