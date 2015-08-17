@@ -5,7 +5,8 @@ requests
 beautifulsoup4
 colorama
 gtk2
+notify
 
 Examples for packages that meet the dependencies:
-Ubuntu: python-bs4, python-requests, python-colorama, python-gtk2
-Arch Linux: python2-beautifulsoup4, python2-requests, python2-pillow, python2-colorama, pygtk
+Ubuntu: python-bs4, python-requests, python-colorama, python-gtk2, python-notify
+Arch Linux: python2-beautifulsoup4, python2-requests, python2-pillow, python2-colorama, pygtk, python2-notify
