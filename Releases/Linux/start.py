@@ -214,6 +214,8 @@ for badge in badgeSet:
 				else:
 					push = [badgeId, dropCountInt, 0]
 					badgesLeft.append(push)
+	except KeyboardInterrupt:
+		raise
 	except:
 		continue
 
@@ -275,6 +277,8 @@ for appID, drops, value in games:
 				logging.warning(getAppName(appID) + " has " + str(dropCountInt) + " card drops remaining")
 				if sys.platform.startswith('win32'):
 					ctypes.windll.kernel32.SetConsoleTitleA("Idle Master - Idling " + getPlainAppName(appID) + " [" + str(dropCountInt) + " remaining]")
+		except KeyboardInterrupt:
+			raise
 		except:
 			if maxFail>0:
 				logging.warning("Error checking if drops are done, number of tries remaining: " + str(maxFail))
