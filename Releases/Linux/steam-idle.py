@@ -35,13 +35,15 @@ def get_steam_api():
     return steam_api
 
 if __name__ == '__main__':
-    if len(sys.argv) != 2:
+    if len(sys.argv) != 3:
         print("Wrong number of arguments")
         sys.exit()
         
     str_app_id = sys.argv[1]
+    str_app_name = sys.argv[2]
     
     os.environ["SteamAppId"] = str_app_id
+    os.environ["SteamAppName"] = str_app_name
     try:
         get_steam_api().SteamAPI_Init()
     except:
@@ -57,7 +59,7 @@ if __name__ == '__main__':
         loader.write(image_bytes)
         loader.close()
 
-        n = pynotify.Notification("Now idling", "App " + str_app_id)
+        n = pynotify.Notification("Now idling", "App (" + str_app_id + ") - <b>" + str_app_name + "</b>")
         n.set_icon_from_pixbuf(loader.get_pixbuf())
         if not n.show():
             print("Failed to send notification")

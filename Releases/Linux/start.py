@@ -65,7 +65,7 @@ def dropDelay(numDrops):
 	else:
 		baseDelay = (5*60)
 	return baseDelay
-	
+
 def idleOpen(appID):
 	try:
 		logging.warning("Starting game " + getAppName(appID) + " to idle cards")
@@ -79,7 +79,7 @@ def idleOpen(appID):
 		elif sys.platform.startswith('darwin'):
 			process_idle = subprocess.Popen(["./steam-idle", str(appID)])
 		elif sys.platform.startswith('linux'):
-			process_idle = subprocess.Popen(["python2", "steam-idle.py", str(appID)])
+			process_idle = subprocess.Popen(["python2", "steam-idle.py", str(appID), getPlainAppName(appID)])
 	except:
 		logging.warning(Fore.RED + "Error launching steam-idle with game ID " + str(appID) + Fore.RESET)
 		raw_input("Press Enter to continue...")
