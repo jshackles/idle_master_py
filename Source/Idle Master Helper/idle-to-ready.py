@@ -126,7 +126,7 @@ try:
 except:
 	logging.warning("Reading badge page, please wait")
 
-userinfo = badgePageData.find("div",{"class": "user_avatar"})
+userinfo = badgePageData.find("a",{"class": "user_avatar"})
 if not userinfo:
 	logging.warning(Fore.RED + "Invalid cookie data, cannot log in to Steam" + Fore.RESET)
 	raw_input("Press Enter to continue...")
@@ -196,33 +196,33 @@ def IdleBatch(appids):
 		elif sys.platform.startswith('darwin'):
 			start_text = "./steam-idle "
 		elif sys.platform.startswith('linux'):
-			start_text = "steam-idle.py "
+			start_text = "./steam-idle.py "
 					
-		process_idle1 = subprocess.Popen(start_text + str(appids[0][0]))
-		process_idle2 = subprocess.Popen(start_text + str(appids[1][0]))
-		process_idle3 = subprocess.Popen(start_text + str(appids[2][0]))
-		process_idle4 = subprocess.Popen(start_text + str(appids[3][0]))
-		process_idle5 = subprocess.Popen(start_text + str(appids[4][0]))
-		process_idle6 = subprocess.Popen(start_text + str(appids[5][0]))
-		process_idle7 = subprocess.Popen(start_text + str(appids[6][0]))
-		process_idle8 = subprocess.Popen(start_text + str(appids[7][0]))
-		process_idle9 = subprocess.Popen(start_text + str(appids[8][0]))
-		process_idle10 = subprocess.Popen(start_text + str(appids[9][0]))
-		process_idle11 = subprocess.Popen(start_text + str(appids[10][0]))
-		process_idle12 = subprocess.Popen(start_text + str(appids[11][0]))
-		process_idle13 = subprocess.Popen(start_text + str(appids[12][0]))
-		process_idle14 = subprocess.Popen(start_text + str(appids[13][0]))
-		process_idle15 = subprocess.Popen(start_text + str(appids[14][0]))
-		process_idle16 = subprocess.Popen(start_text + str(appids[15][0]))
-		process_idle17 = subprocess.Popen(start_text + str(appids[16][0]))
-		process_idle18 = subprocess.Popen(start_text + str(appids[17][0]))
-		process_idle19 = subprocess.Popen(start_text + str(appids[18][0]))
-		process_idle20 = subprocess.Popen(start_text + str(appids[19][0]))
-		process_idle21 = subprocess.Popen(start_text + str(appids[20][0]))
-		process_idle22 = subprocess.Popen(start_text + str(appids[21][0]))
-		process_idle23 = subprocess.Popen(start_text + str(appids[22][0]))
-		process_idle24 = subprocess.Popen(start_text + str(appids[23][0]))
-		process_idle25 = subprocess.Popen(start_text + str(appids[24][0]))
+		process_idle1 = subprocess.Popen(start_text + str(appids[0][0]), shell=True)
+		process_idle2 = subprocess.Popen(start_text + str(appids[1][0]), shell=True)
+		process_idle3 = subprocess.Popen(start_text + str(appids[2][0]), shell=True)
+		process_idle4 = subprocess.Popen(start_text + str(appids[3][0]), shell=True)
+		process_idle5 = subprocess.Popen(start_text + str(appids[4][0]), shell=True)
+		process_idle6 = subprocess.Popen(start_text + str(appids[5][0]), shell=True)
+		process_idle7 = subprocess.Popen(start_text + str(appids[6][0]), shell=True)
+		process_idle8 = subprocess.Popen(start_text + str(appids[7][0]), shell=True)
+		process_idle9 = subprocess.Popen(start_text + str(appids[8][0]), shell=True)
+		process_idle10 = subprocess.Popen(start_text + str(appids[9][0]), shell=True)
+		process_idle11 = subprocess.Popen(start_text + str(appids[10][0]), shell=True)
+		process_idle12 = subprocess.Popen(start_text + str(appids[11][0]), shell=True)
+		process_idle13 = subprocess.Popen(start_text + str(appids[12][0]), shell=True)
+		process_idle14 = subprocess.Popen(start_text + str(appids[13][0]), shell=True)
+		process_idle15 = subprocess.Popen(start_text + str(appids[14][0]), shell=True)
+		process_idle16 = subprocess.Popen(start_text + str(appids[15][0]), shell=True)
+		process_idle17 = subprocess.Popen(start_text + str(appids[16][0]), shell=True)
+		process_idle18 = subprocess.Popen(start_text + str(appids[17][0]), shell=True)
+		process_idle19 = subprocess.Popen(start_text + str(appids[18][0]), shell=True)
+		process_idle20 = subprocess.Popen(start_text + str(appids[19][0]), shell=True)
+		process_idle21 = subprocess.Popen(start_text + str(appids[20][0]), shell=True)
+		process_idle22 = subprocess.Popen(start_text + str(appids[21][0]), shell=True)
+		process_idle23 = subprocess.Popen(start_text + str(appids[22][0]), shell=True)
+		process_idle24 = subprocess.Popen(start_text + str(appids[23][0]), shell=True)
+		process_idle25 = subprocess.Popen(start_text + str(appids[24][0]), shell=True)
 	except:
 		logging.warning("All games started")
 		

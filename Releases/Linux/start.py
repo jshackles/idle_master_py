@@ -176,7 +176,7 @@ try:
 except:
 	logging.warning("Reading badge page, please wait")
 
-userinfo = badgePageData.find("div",{"class": "user_avatar"})
+userinfo = badgePageData.find("a",{"class": "user_avatar"})
 if not userinfo:
 	logging.warning(Fore.RED + "Invalid cookie data, cannot log in to Steam" + Fore.RESET)
 	raw_input("Press Enter to continue...")
