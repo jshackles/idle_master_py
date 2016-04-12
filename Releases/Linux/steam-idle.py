@@ -43,7 +43,7 @@ def init_gui(str_app_id):
     gui.title('App ' + str_app_id)
     gui.resizable(0,0)
     try:
-        url = "http://cdn.akamai.steamstatic.com/steam/apps/" + str_app_id + "/header_292x136.jpg"
+        url = "https://cdn.akamai.steamstatic.com/steam/apps/" + str_app_id + "/header_292x136.jpg"
         image_bytes = urlopen(url).read()
         data_stream = io.BytesIO(image_bytes)
         pil_image = Image.open(data_stream)

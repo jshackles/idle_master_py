@@ -45,7 +45,7 @@ try:
 	authData["steamparental"]=""
 	authData["hasPlayTime"]="false"
 	execfile("./settings.txt",authData)
-	myProfileURL = "http://steamcommunity.com/profiles/"+authData["steamLogin"][:17]
+	myProfileURL = "https://steamcommunity.com/profiles/"+authData["steamLogin"][:17]
 except:
 	logging.warning(Fore.RED + "Error loading config file" + Fore.RESET)
 	raw_input("Press Enter to continue...")
@@ -74,7 +74,7 @@ def generateCookies():
 	
 def getAppName(appID):
 	try:
-		api = requests.get("http://store.steampowered.com/api/appdetails/?appids=" + str(appID) + "&filters=basic")
+		api = requests.get("https://store.steampowered.com/api/appdetails/?appids=" + str(appID) + "&filters=basic")
 		api_data = json.loads(api.text)
 		return Fore.CYAN + api_data[str(appID)]["data"]["name"].encode('ascii', 'ignore') + Fore.RESET
 	except:
