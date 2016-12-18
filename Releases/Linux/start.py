@@ -191,15 +191,13 @@ for badge in badgeSet:
 
 	try:
 		badge_text = badge.get_text()
-		dropCount = badge.find_all("span",{"class": "progress_info_bold"})[0].contents[0]
+		dropCountInt = int(re.findall("\d+", badge.find_all("span",{"class": "progress_info_bold"})[0].get_text())[0])
 		has_playtime = re.search("[0-9\.] hrs on record", badge_text) != None
-        
-		if "No card drops" in dropCount or (has_playtime == False and authData["hasPlayTime"].lower() == "true") :
+		
+		if dropCountInt < 1 or (has_playtime == False and authData["hasPlayTime"].lower() == "true") :
 			continue
 		else:
 			# Remaining drops
-			dropCountInt, junk = dropCount.split(" ",1)
-			dropCountInt = int(dropCountInt)
 			linkGuess = badge.find_parent().find_parent().find_parent().find_all("a")[0]["href"]
 			junk, badgeId = linkGuess.split("/gamecards/",1)
 			badgeId = int(badgeId.replace("/",""))
