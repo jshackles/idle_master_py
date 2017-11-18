@@ -155,7 +155,7 @@ except:
 
 try:
 	badgesLeft = []
-	badgePageData = bs4.BeautifulSoup(r.text)
+	badgePageData = bs4.BeautifulSoup(r.text, "html.parser")
 	badgeSet = badgePageData.find_all("div",{"class": "badge_title_stats"})
 except:
 	logging.warning(Fore.RED + "Error finding drop info" + Fore.RESET)
