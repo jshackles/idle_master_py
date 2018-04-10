@@ -48,6 +48,11 @@ if not authData["steamLogin"]:
 	raw_input("Press Enter to continue...")
 	sys.exit()
 
+if not authData["steamLoginSecure"]:
+	logging.warning(Fore.RED + "No steamLoginSecure set" + Fore.RESET)
+	raw_input("Press Enter to continue...")
+	sys.exit()
+
 def generateCookies():
 	global authData
 	try:
@@ -56,6 +61,7 @@ def generateCookies():
 			timezoneOffset=authData["timezoneOffset"],
 			steamCountry=authData["steamCountry"],
 			steamLogin=authData["steamLogin"],
+			steamLoginSecure=authData["steamLoginSecure"],
 			steamparental=authData["steamparental"]
 		)
 	except:
