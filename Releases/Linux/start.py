@@ -59,11 +59,14 @@ def generateCookies():
 		cookies = dict(
 			sessionid=authData["sessionid"],
 			timezoneOffset=authData["timezoneOffset"],
-			steamCountry=authData["steamCountry"],
-			steamLogin=authData["steamLogin"],
-			steamLoginSecure=authData["steamLoginSecure"],
-			steamparental=authData["steamparental"]
+			steamCountry=authData["steamCountry"]
 		)
+		if "steamLogin" in authData:
+			cookies["steamLogin"] = authData["steamLogin"]
+		if "steamLoginSecure" in authData:
+			cookies["steamLoginSecure"] = authData["steamLoginSecure"]
+		if "steamparental" in authData:
+			cookies["steamparental"] = authData["steamparental"]
 	except:
 		logging.warning(Fore.RED + "Error setting cookies" + Fore.RESET)
 		raw_input("Press Enter to continue...")
