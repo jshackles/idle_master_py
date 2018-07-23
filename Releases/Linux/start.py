@@ -32,7 +32,7 @@ try:
 	authData["steamparental"]=""
 	authData["hasPlayTime"]="false"
 	execfile("./settings.txt",authData)
-	myProfileURL = "http://steamcommunity.com/profiles/"+authData["steamLogin"][:17]
+	myProfileURL = "https://steamcommunity.com/id/"+authData["steamId"]
 except:
 	logging.warning(Fore.RED + "Error loading config file" + Fore.RESET)
 	raw_input("Press Enter to continue...")
@@ -44,12 +44,13 @@ if not authData["sessionid"]:
 	sys.exit()
 
 if not authData["steamLogin"]:
-	logging.warning(Fore.RED + "No steamLogin set" + Fore.RESET)
-	raw_input("Press Enter to continue...")
-	sys.exit()
+	logging.warning(Fore.YELLOW + "No steamLogin set" + Fore.RESET)
 
 if not authData["steamLoginSecure"]:
-	logging.warning(Fore.RED + "No steamLoginSecure set" + Fore.RESET)
+	logging.warning(Fore.YELLOW + "No steamLoginSecure set" + Fore.RESET)
+
+if not authData["steamLoginSecure"] and not authData["steamLogin"]:
+	logging.warning(Fore.RED + "No steamLogin and steamLoginSecure set" + Fore.RESET)
 	raw_input("Press Enter to continue...")
 	sys.exit()
 
@@ -131,7 +132,7 @@ def chillOut(appID):
 	
 def getAppName(appID):
 	try:
-		api = requests.get("http://store.steampowered.com/api/appdetails/?appids=" + str(appID) + "&filters=basic")
+		api = requests.get("https://store.steampowered.com/api/appdetails/?appids=" + str(appID) + "&filters=basic")
 		api_data = json.loads(api.text)
 		return Fore.CYAN + api_data[str(appID)]["data"]["name"].encode('ascii', 'ignore') + Fore.RESET
 	except:
@@ -139,7 +140,7 @@ def getAppName(appID):
 
 def getPlainAppName(appid):
 	try:
-		api = requests.get("http://store.steampowered.com/api/appdetails/?appids=" + str(appID) + "&filters=basic")
+		api = requests.get("https://store.steampowered.com/api/appdetails/?appids=" + str(appID) + "&filters=basic")
 		api_data = json.loads(api.text)
 		return api_data[str(appID)]["data"]["name"].encode('ascii', 'ignore')
 	except:
@@ -223,7 +224,7 @@ for badge in badgeSet:
 				continue
 			else:
 				if authData["sort"]=="mostvalue" or authData["sort"]=="leastvalue":
-					gameValue = requests.get("http://api.enhancedsteam.com/market_data/average_card_price/?appid=" + str(badgeId) + "&cur=usd")
+					gameValue = requests.get("https://api.enhancedsteam.com/market_data/average_card_price/?appid=" + str(badgeId) + "&cur=usd")
 					push = [badgeId, dropCountInt, float(str(gameValue.text))]
 					badgesLeft.append(push)
 				else:
