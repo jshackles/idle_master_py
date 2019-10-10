@@ -1,18 +1,12 @@
-from __future__ import print_function
 import os
 import sys
 import platform
 import io
 from PIL import Image, ImageTk
 from ctypes import CDLL
-try: #Python 2
-    from urllib2 import urlopen
-except ImportError: # Python 3
-    from urllib.request import urlopen
-try:
-    import Tkinter as tk
-except ImportError:
-    import tkinter as tk
+from urllib.request import urlopen
+import tkinter as tk
+
 
 def get_steam_api():
     if sys.platform.startswith('win32'):
@@ -33,14 +27,14 @@ def get_steam_api():
     else:
         print('Operating system not supported')
         sys.exit()
-        
+
     return steam_api
 
-    
+
 def init_gui(str_app_id):
     gui = tk.Tk()
     gui.title('App ' + str_app_id)
-    gui.resizable(0,0)
+    gui.resizable(0, 0)
     try:
         url = "http://cdn.akamai.steamstatic.com/steam/apps/" + str_app_id + "/header_292x136.jpg"
         image_bytes = urlopen(url).read()
@@ -51,24 +45,24 @@ def init_gui(str_app_id):
         label.image = tk_image
     except:
         label = tk.Label(gui, text="Couldn't load image")
-        
+
     label.pack()
     return gui
-    
+
+
 if __name__ == '__main__':
     if len(sys.argv) != 2:
         print("Wrong number of arguments")
         sys.exit()
-        
+
     str_app_id = sys.argv[1]
-    
+
     os.environ["SteamAppId"] = str_app_id
     try:
         get_steam_api().SteamAPI_Init()
     except:
         print("Couldn't initialize Steam API")
         sys.exit()
-        
+
     gui = init_gui(str_app_id)
     gui.mainloop()
-    
