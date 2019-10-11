@@ -2,3 +2,6 @@ bs4
 colorama
 pillow
 requests
+PyGObject
+dbus-python
+notify2

@@ -1,17 +1,15 @@
 #!/usr/bin/env python
-from __future__ import print_function
 import os
 import sys
 import platform
 from ctypes import CDLL
-try: #Python 2
-    from urllib2 import urlopen
-except ImportError: # Python 3
-    from urllib.request import urlopen
+from urllib.request import urlopen
+import notify2
 
-import gtk
-import gtk.gdk
-import pynotify
+import gi
+gi.require_version('GdkPixbuf', '2.0')
+from gi.repository import GdkPixbuf
+
 
 def get_steam_api():
     if sys.platform.startswith('win32'):
@@ -32,17 +30,18 @@ def get_steam_api():
     else:
         print('Operating system not supported')
         sys.exit()
-        
+
     return steam_api
+
 
 if __name__ == '__main__':
     if len(sys.argv) != 3:
         print("Wrong number of arguments")
         sys.exit()
-        
+
     str_app_id = sys.argv[1]
     str_app_name = sys.argv[2]
-    
+
     os.environ["SteamAppId"] = str_app_id
     os.environ["SteamAppName"] = str_app_name
     try:
@@ -50,17 +49,17 @@ if __name__ == '__main__':
     except:
         print("Couldn't initialize Steam API")
         sys.exit()
-        
-    if pynotify.init("Idle-Master"):
+
+    if notify2.init("Idle-Master"):
         # Image URI
         uri = "http://cdn.akamai.steamstatic.com/steam/apps/" + str_app_id + "/header_292x136.jpg"
         image_bytes = urlopen(uri).read()
 
-        loader = gtk.gdk.PixbufLoader();
+        loader = GdkPixbuf.PixbufLoader()
         loader.write(image_bytes)
         loader.close()
 
-        n = pynotify.Notification("Now idling", "App (" + str_app_id + ") - <b>" + str_app_name + "</b>")
+        n = notify2.Notification("Now idling", "App (" + str_app_id + ") - <b>" + str_app_name + "</b>")
         n.set_icon_from_pixbuf(loader.get_pixbuf())
         if not n.show():
             print("Failed to send notification")
