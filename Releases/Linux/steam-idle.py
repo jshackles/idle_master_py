@@ -53,7 +53,7 @@ if __name__ == '__main__':
         
     if pynotify.init("Idle-Master"):
         # Image URI
-        uri = "http://cdn.akamai.steamstatic.com/steam/apps/" + str_app_id + "/header_292x136.jpg"
+        uri = "https://cdn.akamai.steamstatic.com/steam/apps/" + str_app_id + "/header_292x136.jpg"
         image_bytes = urlopen(uri).read()
 
         loader = gtk.gdk.PixbufLoader();
