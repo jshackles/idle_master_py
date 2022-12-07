@@ -3,17 +3,15 @@ from __future__ import print_function
 import os
 import sys
 import platform
-import io
-from PIL import Image, ImageTk
 from ctypes import CDLL
 try: #Python 2
     from urllib2 import urlopen
 except ImportError: # Python 3
     from urllib.request import urlopen
-try:
-    import Tkinter as tk
-except ImportError:
-    import tkinter as tk
+
+import gtk
+import gtk.gdk
+import pynotify
 
 def get_steam_api():
     if sys.platform.startswith('win32'):
@@ -37,39 +35,34 @@ def get_steam_api():
         
     return steam_api
 
-    
-def init_gui(str_app_id):
-    gui = tk.Tk()
-    gui.title('App ' + str_app_id)
-    gui.resizable(0,0)
-    try:
-        url = "http://cdn.akamai.steamstatic.com/steam/apps/" + str_app_id + "/header_292x136.jpg"
-        image_bytes = urlopen(url).read()
-        data_stream = io.BytesIO(image_bytes)
-        pil_image = Image.open(data_stream)
-        tk_image = ImageTk.PhotoImage(pil_image)
-        label = tk.Label(gui, image=tk_image)
-        label.image = tk_image
-    except:
-        label = tk.Label(gui, text="Couldn't load image")
-        
-    label.pack()
-    return gui
-    
 if __name__ == '__main__':
-    if len(sys.argv) != 2:
+    if len(sys.argv) != 3:
         print("Wrong number of arguments")
         sys.exit()
         
     str_app_id = sys.argv[1]
+    str_app_name = sys.argv[2]
     
     os.environ["SteamAppId"] = str_app_id
+    os.environ["SteamAppName"] = str_app_name
     try:
         get_steam_api().SteamAPI_Init()
     except:
         print("Couldn't initialize Steam API")
         sys.exit()
         
-    gui = init_gui(str_app_id)
-    gui.mainloop()
-    
+    if pynotify.init("Idle-Master"):
+        # Image URI
+        uri = "https://cdn.akamai.steamstatic.com/steam/apps/" + str_app_id + "/header_292x136.jpg"
+        image_bytes = urlopen(uri).read()
+
+        loader = gtk.gdk.PixbufLoader();
+        loader.write(image_bytes)
+        loader.close()
+
+        n = pynotify.Notification("Now idling", "App (" + str_app_id + ") - <b>" + str_app_name + "</b>")
+        n.set_icon_from_pixbuf(loader.get_pixbuf())
+        if not n.show():
+            print("Failed to send notification")
+    else:
+        print("Failed to init notifications")
